@@ -1,4 +1,4 @@
-#CLIENT-SERVER ARCHITECTURE
+# CLIENT-SERVER ARCHITECTURE
 * Client-server architecture (client/server) is a network architecture in which each computer or process on the network is either a client or a server.
 Servers are powerful computers or processes dedicated to managing disk drives (file servers), printers (print servers), or network traffic (network servers).
 * Clients are PCs or workstations on which users run applications. Clients rely on servers for resources, such as files, devices, and even processing power.
@@ -9,7 +9,7 @@ Servers are powerful computers or processes dedicated to managing disk drives (f
 
 
 
-##How it works
+## How it works
 
 * Client computer sends a 'Process Request' to web server through web browser.
 * Which is then processed by the web server and gives the first response related to that request.
