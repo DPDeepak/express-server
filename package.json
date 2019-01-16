@@ -1,0 +1,21 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "pattern_code",
+  "main": "index.js",
+  "scripts": {
+    "pattern:diamond":"nodemon extra/patterns/Diamond.js",
+    "pattern:equilateral":"nodemon extra/patterns/Equilateral.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DPDeepak/express-server.git"
+  },
+  "author": "Deepak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DPDeepak/express-server/issues"
+  },
+  "homepage": "https://github.com/DPDeepak/express-server#readme"
+}
