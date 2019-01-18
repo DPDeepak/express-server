@@ -6,16 +6,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "validation": "nodemon extra/utils/validation.js",
-    "permissions": "nodemon extra/utils/permissions.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DPDeepak/express-server.git"
-  },
-  "author": "deepak",
+    "permissions": "nodemon extra/utils/permissions.js",
+    "pattern:diamond": "nodemon extra/patterns/Diamond.js",
+    "pattern:equilateral": "nodemon extra/patterns/Equilateral.js"
+
+ 
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/DPDeepak/express-server.git"
+    },
+  "author": "Deepak",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/DPDeepak/express-server/issues"
-  },
-  "homepage": "https://github.com/DPDeepak/express-server#readme"
-}
+    "bugs": {
+      "url": "https://github.com/DPDeepak/express-server/issues"
+    },
+    "homepage": "https://github.com/DPDeepak/express-server#readme"
+  }
