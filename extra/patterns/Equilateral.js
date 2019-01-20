@@ -1,4 +1,4 @@
-function equilateral(n)
+export default function equilateral(n)
 {
     let space='',star=''
 for(let i=0;i<=n;i++)
@@ -15,6 +15,4 @@ for(let i=0;i<=n;i++)
         space='',star=''
     }
 }
-equilateral(5)
-equilateral(7)
-equilateral(10)
+

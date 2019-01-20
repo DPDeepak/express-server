@@ -1,4 +1,4 @@
-function diamond(n)
+export default function diamond(n)
 {
     let space='',star=''
 for(let i=0;i<=n;i++)
@@ -29,7 +29,4 @@ for(let i=0;i<=n;i++)
     }
     
 }
-diamond(2)
-diamond(3)
-diamond(5)
 

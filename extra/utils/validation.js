@@ -1,49 +1,10 @@
-const users = [
-    {
-    traineeEmail: 'trainee1@successive.tech',
-    reviewerEmail: 'reviewer1@successive.tech'
-    },
-    {
-    traineeEmail: 'trainee2@successive.tech',
-    reviewerEmail: 'reviewer2@successive.tech'
-    },
-    {
-    traineeEmail: 'trainee3@gmail.tech',
-    reviewerEmail: 'reviewer3@successive.tech'
-    },
-     {
-    traineeEmail: 'trainee1@successive.tech',
-    reviewerEmail: 'reviewer1.tech'
-    },
-    {
-    traineeEmail: 'trainee2@successive.tech',
-    reviewerEmail: 'reviewer2@successive.tech'
-    },
-    {
-    traineeEmail: 'trainee3@successive.tech',
-    reviewerEmail: 'reviewer3@successive.tech'
-    },
-     {
-    traineeEmail: 't121212@facebook.tech',
-    reviewerEmail: 'reviewer1@softonic.tech'
-    },
-    {
-    traineeEmail: 'trainee2@successive.tech',
-    reviewerEmail: 'reviewer2@successive.tech'
-    },
-    {
-    traineeEmail: 'trainee3@successive.tech',
-    reviewerEmail: 'reviewer3@successive.tech'
-    },
-]
-function validateEmail(email) {
-let rex= /^([A-Za-z0-9_\-\.])+\@(successive.tech)$/;
-return(rex.test(email))
-}
+import validateEmail from './helpers';
+
+
 let invalidCount = 0, validCount = 0;
 const validUser = [], invalidUser = [];
 
-function validateUsers(us) {
+export default function validateUsers(users) {
     users.forEach(function(user,index) {
     const { traineeEmail,reviewerEmail } = user
     if(validateEmail(traineeEmail) && validateEmail(reviewerEmail)) {
@@ -60,6 +21,3 @@ function validateUsers(us) {
     if(invalidCount)
     console.log(`${invalidCount} invalid users are ${invalidUser}`)
 }
-
-
-validateUsers(users)
