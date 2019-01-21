@@ -12,7 +12,7 @@ const permissions : IPermission = {
         delete: [],
     },
     'node': {
-        all: [head_trainer], 
+        all: [head_trainer,trainee], 
         read: [trainee, trainer],
         write: [trainer, trainee],
         delete: [head_trainer],

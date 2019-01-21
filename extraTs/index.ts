@@ -24,6 +24,6 @@ const users : IUsers[] = [
 
 diamond(4)
 equilateral(5)
-hasPermission('node', 'head_trainer', 'all');
-hasPermission('node', 'trainee', 'all');
+hasPermission('node', 'trainee', 'delete');
+
 validateUsers(users)
