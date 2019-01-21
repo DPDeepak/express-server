@@ -1,7 +1,8 @@
 import { diamond, equilateral } from './patterns'
 import {hasPermission, validateUsers } from './utils'
+import { IUsers } from './utils/interfaces';
 
-const users = [
+const users : IUsers[] = [
     {
     traineeEmail: 'trainee1@successive.tech',
     reviewerEmail: 'reviewer1@successive.tech'
