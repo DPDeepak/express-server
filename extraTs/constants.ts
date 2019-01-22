@@ -4,7 +4,7 @@ const trainee = 'trainee'
 const trainer = 'trainer'
 const head_trainer = 'head_trainer'
 
-const permissions : IPermission = {
+const permissions: IPermission = {
     'javascript': {
         all: [head_trainer],
         read: [trainee, trainer],
@@ -12,7 +12,7 @@ const permissions : IPermission = {
         delete: [],
     },
     'node': {
-        all: [head_trainer,trainee], 
+        all: [head_trainer, trainee],
         read: [trainee, trainer],
         write: [trainer, trainee],
         delete: [head_trainer],
@@ -25,4 +25,4 @@ const permissions : IPermission = {
     }
 }
 
-export{permissions,trainee,trainer,head_trainer}
+export { permissions, trainee, trainer, head_trainer }

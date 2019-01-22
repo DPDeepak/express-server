@@ -1,4 +1,4 @@
-export default function equilateral(n:number): void {
+export default function equilateral(n: number): void {
     let space = '', star = ''
     for (let i = 0; i <= n; i++) {
         for (let j = 0; i + j < n; j++) {

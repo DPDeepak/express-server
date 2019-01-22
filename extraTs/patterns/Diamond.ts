@@ -7,7 +7,7 @@ export default function diamond(n: number): void {
         for (let k = 0; k < i; k++) {
             star += '* '
         }
-        console.log(space + star)
+        console.log(space + star) 
         space = '', star = ''
     }
     for (let i = 0; i <= n; i++) {
