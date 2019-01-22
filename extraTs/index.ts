@@ -1,7 +1,8 @@
 import { diamond, equilateral } from './patterns'
 import { hasPermission, validateUsers } from './utils'
+import { IUsers } from './utils/interfaces';
 
-const users = [
+const users: IUsers[] = [
     {
         traineeEmail: 'trainee1@successive.tech',
         reviewerEmail: 'reviewer1@successive.tech'
@@ -23,6 +24,6 @@ const users = [
 
 diamond(4)
 equilateral(5)
-hasPermission('node', 'head_trainer', 'all');
-hasPermission('node', 'trainee', 'all');
+hasPermission('node', 'trainee', 'delete');
+
 validateUsers(users)

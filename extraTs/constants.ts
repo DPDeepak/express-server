@@ -1,8 +1,10 @@
+import { IPermission } from "./utils/interfaces";
+
 const trainee = 'trainee'
 const trainer = 'trainer'
 const head_trainer = 'head_trainer'
 
-const permissions = {
+const permissions: IPermission = {
     'javascript': {
         all: [head_trainer],
         read: [trainee, trainer],
@@ -10,7 +12,7 @@ const permissions = {
         delete: [],
     },
     'node': {
-        all: [head_trainer], 
+        all: [head_trainer, trainee],
         read: [trainee, trainer],
         write: [trainer, trainee],
         delete: [head_trainer],
@@ -23,4 +25,4 @@ const permissions = {
     }
 }
 
-export{permissions,trainee,trainer,head_trainer}
+export { permissions, trainee, trainer, head_trainer }
