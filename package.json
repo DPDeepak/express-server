@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "babel-node extra --presets env",
-    "extraTs": "tsc-watch --project ./ --onSuccess \"npm run nodemon\"",
+    "src": "tsc-watch --project ./ --onSuccess \"npm run nodemon\"",
     "nodemon": "nodemon ./dist/index.js"
   },
   "repository": {
@@ -18,7 +18,12 @@
     "url": "https://github.com/DPDeepak/express-server/issues"
   },
   "homepage": "https://github.com/DPDeepak/express-server#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@types/express": "^4.16.0",
+    "@types/node": "^10.12.18",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
