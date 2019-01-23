@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "babel-node extra --presets env",
-    "src": "tsc-watch --project ./ --onSuccess \"npm run nodemon\"",
+    "start": "tsc-watch --project ./ --onSuccess \"npm run nodemon\"",
+    "prestart": "npm run clean",
+    "clean": "rm -r dist",
     "nodemon": "nodemon ./dist/index.js"
   },
   "repository": {
@@ -21,6 +23,7 @@
   "dependencies": {
     "@types/express": "^4.16.0",
     "@types/node": "^10.12.18",
+    "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4"
   },
