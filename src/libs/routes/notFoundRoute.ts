@@ -1,3 +1,3 @@
-export default function notFoundRoute(res, req, next) {
+export default function notFoundRoute(req, res, next) {
     next({ error: 'Not Found' })
 }
