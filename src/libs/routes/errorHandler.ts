@@ -2,9 +2,9 @@ export default function errorHandler(err, req, res, next) {
 
     const timestamp = new Date().toJSON();
     res.json({
-        error: err,
-        message: "error",
-        status: 500,
+        error: err || "Something Went Wrong",
+        message: "Bad request",
+        status: 400,
         timestamp: timestamp
     })
 }
