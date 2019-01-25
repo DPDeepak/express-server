@@ -15,6 +15,8 @@ class TraineeController {
     }
     post(req: Request, res: Response, next: NextFunction) {
         const { name, id } = req.body
+        console.log('inside post');
+        
         if (name && id)
             res.send(successHandler(name, id, 'successfully posted'));
         else
