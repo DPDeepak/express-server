@@ -13,7 +13,7 @@ class TraineeController {
         ]
         res.send(successHandler('Request Done', 200, data))
     }
-    post(req: Request, res: Response, next: NextFunction) {
+   create(req: Request, res: Response, next: NextFunction) {
         const { name, id } = req.body
         console.log('inside post');
         

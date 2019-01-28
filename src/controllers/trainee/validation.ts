@@ -1,7 +1,9 @@
+import { runInNewContext } from "vm";
+
 export const validation = {
     get: {
         skip: {
-            required: false,
+            required: true,
             default: 0,
             number: true,
             in: ['query'],
@@ -21,13 +23,13 @@ export const validation = {
             string: true,
             in: ['body'],
             custom: function (value) {
-                console.log('Value', value);
-                throw { error: 'Error Occured', message: 'Message' }
+                console.log('value', value);
+                
             }
         },
         name: {
             required: true,
-            regex: '',
+            regex: /^[a-zA-Z]+$/,
             in: ['body'],
             errorMessage: 'Name is required',
         },
@@ -37,7 +39,7 @@ export const validation = {
         id: {
             required: true,
             errorMessage: 'Id is required',
-            in: ['params']
+            in: ['body']
         }
     },
     update: {
@@ -50,7 +52,10 @@ export const validation = {
             in: ['body'],
             required: true,
             isObject: true,
-            custom: function (dataToUpdate) { },
+            custom: function (dataToUpdate) { 
+                console.log('dataToUpdate', dataToUpdate);
+                
+            },
         }
     }
 }
