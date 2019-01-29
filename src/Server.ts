@@ -38,7 +38,7 @@ class Server {
             if (error) {
                 throw error;
             }
-            console.log("Running on Port : ",port");
+            console.log("Running on Port : ",port);
 
         });
     }
