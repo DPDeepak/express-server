@@ -1,6 +1,6 @@
 import { permissions, head_trainer, trainee, trainer } from '../constants'
 
-export default function hasPermission(moduleName: string, role: string, permissionType: string) {
+const hasPermission = function (moduleName: string, role: string, permissionType: string) {
 
     if ((permissions[moduleName]['all' as string].includes(role) && permissions[moduleName][permissionType])) {
         // console.log('true');
@@ -15,3 +15,5 @@ export default function hasPermission(moduleName: string, role: string, permissi
         // console.log('false');
     }
 }
+
+export default hasPermission

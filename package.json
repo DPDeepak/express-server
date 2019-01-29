@@ -7,7 +7,7 @@
     "dev": "babel-node extra --presets env",
     "start": "tsc-watch --project ./ --onSuccess \"npm run nodemon\"",
     "prestart": "npm run clean",
-    "clean": "rm -r dist",
+    "clean": "rm -r -f dist",
     "nodemon": "nodemon ./dist/index.js"
   },
   "repository": {
@@ -25,7 +25,8 @@
     "@types/node": "^10.12.18",
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
