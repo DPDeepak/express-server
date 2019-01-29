@@ -10,7 +10,7 @@ export const validation = {
             errorMessage: 'Skip is invalid',
         },
         limit: {
-            required: false,
+            required: true,
             default: 10,
             number: true,
             in: ['query'],
