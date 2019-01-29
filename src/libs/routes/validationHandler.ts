@@ -27,7 +27,7 @@ export const validationHandler = (config) => (req, res, next) => {
             }
             if (item.number) {
                 if (isNaN(value[0]))
-                    next({ error: item.errorMessage || `${value} is not object type` })
+                    next({ error: item.errorMessage || `${value} is not number type` })
             }
             if (item.regex) {
                 const flag = item.regex.test(value)
