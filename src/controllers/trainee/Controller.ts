@@ -3,48 +3,21 @@ import { successHandler } from '../../libs/routes/successHandler'
 
 class TraineeController {
     get(req, res) {
-        const data = [
-            {
-                name: 'trainee'
-            },
-            {
-                name: 'trainee2'
-            }
-        ]
-        res.send(successHandler('Request Done', 200, data))
+       
+        res.send(successHandler('Request Done', 200, 'data retieved'))
     }
-    post(req: Request, res: Response, next: NextFunction) {
-        const { name, id } = req.body
-        if (name && id)
-            res.send(successHandler(name, id, 'successfully posted'));
-        else
-            next({ error: "Name or id missed" })
+   create(req: Request, res: Response, next: NextFunction) {
+        res.send(successHandler('successfully posted',200,'data is correct'));
     }
     put(req: Request, res: Response, next: NextFunction) {
-        const data = {
-            name: 'deepak',
-            id: '25'
-        }
-        const { name, id } = req.body
-        if (id == data.id) {
-            data.name = name
-            res.send(successHandler(data.name, id, 'succesfully updated'))
-        }
-        else
-            next({ error: 'Id not Matched' })
+       
+            res.send(successHandler('succesfully updated',200,'data is coorect'))
+        
     }
     delete(req: Request, res: Response, next: NextFunction) {
-        const data = {
-            name: 'deepak',
-            id: '25'
-        }
-        const { id } = req.body
-        if (id == data.id) {
-            res.send(successHandler(data.name, id, 'succesfully deleted'))
-        }
-        else {
-            next({ error: 'Id not matched' })
-        }
+       
+            res.send(successHandler('succesfully deleted',200,'data cannot be retrived now'))
+       
     }
 
 }

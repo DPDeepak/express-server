@@ -6,7 +6,6 @@ class Server {
     private app: express.Express
     constructor(private config) {
         this.app = express();
-        console.log('constructor');
 
     }
 
@@ -22,7 +21,6 @@ class Server {
     }
 
     public setupRoutes() {
-        console.log("setup routes");
         const { app } = this;
         app.use('/health-check', (req, res) => {
             res.send("I am OK!")
@@ -38,7 +36,7 @@ class Server {
             if (error) {
                 throw error;
             }
-            console.log("Running");
+            console.log("Running on Port : ",port);
 
         });
     }
