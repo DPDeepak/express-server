@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser'
 import { errorHandler, notFoundRoute } from './libs/routes'
 import router from './router'
+import Database from './libs/Database';
 class Server {
     private app: express.Express
     constructor(private config) {
@@ -31,14 +32,18 @@ class Server {
 
     }
     public run() {
-        const { app, config: { port } } = this;
+        const { app, config: { port, MongoUri:mongo } } = this;
+      Database.open(mongo).then(() => { 
         app.listen(port, error => {
             if (error) {
                 throw error;
             }
             console.log("Running on Port : ",port);
-
-        });
+            Database.close()
+        })
+        
+      }).catch((err)=>{console.log('Error in connection');
+      })
     }
 }
 export default Server 
