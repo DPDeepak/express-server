@@ -1,5 +1,3 @@
-import { validation } from "src/controllers/trainee/validation";
-
 export const validationHandler = (config) => (req, res, next) => {
     const serverData = Object.keys(req.body)
     const keys = Object.keys(config)
