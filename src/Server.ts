@@ -33,16 +33,18 @@ class Server {
     }
     public run() {
         const { app, config: { port, MongoUri:mongo } } = this;
-      Database.open(mongo).then(() => { 
+      Database.open(mongo)
+      .then(() => { 
         app.listen(port, error => {
             if (error) {
                 throw error;
             }
             console.log("Running on Port : ",port);
-            Database.close()
+            // Database.close()
         })
         
-      }).catch((err)=>{console.log('Error in connection');
+      })
+      .catch((err)=>{console.log('Error in connection');
       })
     }
 }
