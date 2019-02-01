@@ -7,9 +7,7 @@ class Server {
     private app: express.Express
     constructor(private config) {
         this.app = express();
-
     }
-
     public bootstrap() {
         this.initBodyParser()
         this.setupRoutes()
@@ -20,7 +18,6 @@ class Server {
         app.use(bodyParser.urlencoded({ extended: false }))
         app.use(bodyParser.json())
     }
-
     public setupRoutes() {
         const { app } = this;
         app.use('/health-check', (req, res) => {
@@ -29,23 +26,23 @@ class Server {
         app.use('/api', router)
         app.use(notFoundRoute)
         app.use(errorHandler)
-
     }
     public run() {
-        const { app, config: { port, MongoUri:mongo } } = this;
-      Database.open(mongo)
-      .then(() => { 
-        app.listen(port, error => {
-            if (error) {
-                throw error;
-            }
-            console.log("Running on Port : ",port);
-            // Database.close()
-        })
-        
-      })
-      .catch((err)=>{console.log('Error in connection');
-      })
+        const { app, config: { port, MongoUri: mongo } } = this;
+        Database.open(mongo)
+            .then(() => {
+                app.listen(port, error => {
+                    if (error) {
+                        throw error;
+                    }
+                    console.log("Running on Port : ", port);
+                    //Database.close()
+                })
+
+            })
+            .catch((err) => {
+                console.log('Error in connection');
+            })
     }
 }
 export default Server 

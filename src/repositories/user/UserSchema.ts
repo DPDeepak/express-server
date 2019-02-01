@@ -5,6 +5,7 @@ export class UserSchema extends mongoose.Schema {
    const  baseSchema = {
         _id: String,
         name: String,
+        email: String,
         }
         super(baseSchema,option);
     }
