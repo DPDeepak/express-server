@@ -17,12 +17,10 @@ class UserController {
             role,
         };
         res.send(successHandler('Request Done', 200, all));
-        console.log('data fetched');
     }
     public create(req: Request, res: Response, next: NextFunction) {
         const data = req.query;
         repository.create(data).then((response) => {
-            console.log(response, '----------------------');
 
             res.send(successHandler('successfully posted', 200, data));
         }).catch((err) => { throw err; });
@@ -30,7 +28,6 @@ class UserController {
     public put(req: Request, res: Response, next: NextFunction) {
         const data = req.query.oldName;
         const data2 = req.query.newName;
-        console.log(data, '----------------------');
 
         repository.update(data, data2).then((data1) => {
             res.send(successHandler('successfully posted', 200, data1));

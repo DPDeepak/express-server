@@ -29,7 +29,7 @@ export default class UserRepository {
         return this.model.create(saveData);
     }
     public remove(data: any): any {
-      return  userModel.deleteOne  ( data ,
+        return userModel.deleteOne(data,
             (err) => {
                 if (err) { console.log('error'); }
                 else {
@@ -39,12 +39,12 @@ export default class UserRepository {
             });
     }
     public update(oldData, newData): any {
-       return userModel.findOneAndUpdate({ name: oldData }, { name: newData }, (err, user) => {
+        return userModel.findOneAndUpdate({ name: oldData }, { name: newData }, (err, user) => {
             if (err) { throw err; }
         },
         );
     }
-    public read(data) {
+    public read(data): any {
         // userModel.findOne({name:data},function(err,data) {
         //     if(err)
         //     console.log('Error in fetching',err);
@@ -58,7 +58,6 @@ export default class UserRepository {
         //     console.log('index', { docs: docs })
         // })
         console.log(data);
-
         return this.model.find(data);
     }
 }
