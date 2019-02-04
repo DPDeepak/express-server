@@ -1,7 +1,7 @@
-import * as mongoose from "mongoose"
-import seed from "./seedData";
+import * as mongoose from 'mongoose';
+import seed from './seedData';
 class Database {
-    static open(MongoUrl) {
+    public static open(MongoUrl) {
         // return mongoose.connect(MongoUrl, { useNewUrlParser: true }).then(
         //     () => {
         //         console.log('Successfully connected');
@@ -12,20 +12,20 @@ class Database {
 
         //     }
         // )
-        return new Promise((resolve,reject)=>{
-            mongoose.connect(MongoUrl,{ useNewUrlParser: true}).then(()=>{
+        return new Promise((resolve, reject) => {
+            mongoose.connect(MongoUrl, { useNewUrlParser: true}).then(() => {
                 console.log('connected');
-                seed()
-               resolve();
-            }).catch((err)=> {
-                reject(err)
-            })
-        })
+                seed();
+                resolve();
+            }).catch((err) => {
+                reject(err);
+            });
+        });
     }
-    static close() {
-        mongoose.disconnect()
+    public static close() {
+        mongoose.disconnect();
         console.log('Disconnected');
-        
+
     }
 }
-export default Database
+export default Database;

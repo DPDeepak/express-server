@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "babel-node extra --presets env",
     "start": "tsc-watch --project ./ --onSuccess \"npm run nodemon\"",
-    "prestart": "npm run clean",
+    "prestart": "npm run clean ",
+    "lint": "./node_modules/tslint/bin/tslint --fix -c  tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'",
+    "lint:fix": "yarn lint -- --fix",
     "clean": "rm -r -f dist",
     "nodemon": "nodemon ./dist/index.js"
   },
@@ -29,7 +31,8 @@
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "mongodb": "^3.1.13",
-    "mongoose": "^5.4.7"
+    "mongoose": "^5.4.7",
+    "tslint": "^5.12.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

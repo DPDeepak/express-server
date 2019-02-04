@@ -1,28 +1,28 @@
-import { IPermission } from "./interface";
+import { IPermission } from './interface';
 
-const trainee = 'trainee'
-const trainer = 'trainer'
-const head_trainer = 'head_trainer'
+const trainee = 'trainee';
+const trainer = 'trainer';
+const headTrainer = 'headTrainer';
 
 const permissions: IPermission = {
-    'javascript': {
-        all: [head_trainer],
+    java: {
+        all: [headTrainer],
+         delete: [headTrainer],
+        read: [trainee, trainer],
+        write: [trainer, trainee],
+    },
+    javascript: {
+        all: [headTrainer],
+        delete: [],
         read: [trainee, trainer],
         write: [trainer],
-        delete: [],
     },
-    'node': {
-        all: [head_trainer, trainee],
+    node: {
+        all: [headTrainer, trainee],
+        delete: [headTrainer],
         read: [trainee, trainer],
         write: [trainer, trainee],
-        delete: [head_trainer],
     },
-    'java': {
-        all: [head_trainer],
-        read: [trainee, trainer],
-        write: [trainer, trainee],
-        delete: [head_trainer],
-    }
-}
+};
 
-export { permissions, trainee, trainer, head_trainer }
+export { permissions, trainee, trainer, headTrainer };

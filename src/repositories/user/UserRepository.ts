@@ -1,17 +1,17 @@
-import * as mongoose from 'mongoose'
-import IUserModel from './IUserModel'
-import { userModel } from './UserModel'
+import * as mongoose from 'mongoose';
+import IUserModel from './IUserModel';
+import { userModel } from './UserModel';
 
 export default class UserRepository {
-    private model: mongoose.Model<IUserModel>;
     public static generateObjectId() {
-        return mongoose.Types.ObjectId()
+        return mongoose.Types.ObjectId();
     }
+    private model: mongoose.Model<IUserModel>;
     constructor() {
         this.model = userModel;
     }
-    public count():any {
-        return this.model.countDocuments({})
+    public count(): any {
+        return this.model.countDocuments({});
     }
     public create(data: any): Promise<IUserModel> {
         // console.log('---------', ...data, UserRepository.generateObjectId())
@@ -23,25 +23,26 @@ export default class UserRepository {
         console.log(data);
         const saveData = {
             ...data,
-            _id: UserRepository.generateObjectId()
-        }
+            _id: UserRepository.generateObjectId(),
+        };
 
         return this.model.create(saveData);
     }
-    public remove(data: any):any {
+    public remove(data: any): any {
       return  userModel.deleteOne  ( data ,
-            function (err) {
-                if (err) console.log('error');
-                else
+            (err) => {
+                if (err) { console.log('error'); }
+                else {
                     console.log('successfully deleted', data);
+                }
 
             });
     }
-    public update(oldData, newData):any {
-       return userModel.findOneAndUpdate({ name: oldData }, { name: newData }, function (err, user) {
-            if (err) throw err;
-        }
-        )
+    public update(oldData, newData): any {
+       return userModel.findOneAndUpdate({ name: oldData }, { name: newData }, (err, user) => {
+            if (err) { throw err; }
+        },
+        );
     }
     public read(data) {
         // userModel.findOne({name:data},function(err,data) {
@@ -53,11 +54,11 @@ export default class UserRepository {
         // userModel.find({}, function (err, docs) {
         //     if(err)
         //     console.log('Err');
-        //    else 
+        //    else
         //     console.log('index', { docs: docs })
         // })
         console.log(data);
-        
-        return this.model.find(data)
+
+        return this.model.find(data);
     }
 }
