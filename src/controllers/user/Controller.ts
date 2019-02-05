@@ -26,10 +26,10 @@ class UserController {
         }).catch((err) => { throw err; });
     }
     public put(req: Request, res: Response, next: NextFunction) {
-        const data = req.query.oldName;
-        const data2 = req.query.newName;
+        const email = req.query.email;
+        const newName = req.query.newName;
 
-        repository.update(data, data2).then((data1) => {
+        repository.update(email, newName).then((data1) => {
             res.send(successHandler('successfully posted', 200, data1));
         }).catch((err) => { throw err; });
     }

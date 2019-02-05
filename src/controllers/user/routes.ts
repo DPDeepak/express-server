@@ -7,7 +7,7 @@ const userRouter = express.Router();
 
 userRouter.get('/', authMiddleWare('node', 'read'), user.get);
 userRouter.post('/', authMiddleWare('java', 'write'), user.create);
-userRouter.put('/',  authMiddleWare('node', 'read'), user.put);
+userRouter.put('/',  authMiddleWare('traineeModule', 'update'), user.put);
 userRouter.delete('/', authMiddleWare('java', 'delete'), user.delete);
 
 export default userRouter;
