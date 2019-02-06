@@ -17,12 +17,6 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
         return this.model.countDocuments({});
     }
     public create(data: any): Promise<IUserModel> {
-        // console.log('---------', ...data, UserRepository.generateObjectId())
-        // return this.model.create(data, UserRepository.generateObjectId())
-        // const user = new this.model(data);
-        // return user.save((err, res) => {
-        //     console.log('---------------22------', err, res)
-        // })
         console.log(data);
         const id = UserRepository.generateObjectId();
         const saveData = {
@@ -53,19 +47,6 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
         // );
     }
     public read(data): any {
-        // userModel.findOne({name:data},function(err,data) {
-        //     if(err)
-        //     console.log('Error in fetching',err);
-        //     else
-        //     console.log(data);
-        // })
-        // userModel.find({}, function (err, docs) {
-        //     if(err)
-        //     console.log('Err');
-        //    else
-        //     console.log('index', { docs: docs })
-        // })
-        console.log(data);
         return this.model.find(data);
     }
 }

@@ -6,17 +6,17 @@ const repository = new UserRepository();
 class UserController {
 
     public get(req, res) {
-        // repository.read({ _id: req.query.id }).then((data) => {
-        //     res.send(successHandler('Request Done', 200, data))
-        // }).catch((err) => { throw err })
-        const { name, email, _id, role } = req.body.data;
+        const { name, email, role } = req.body.data;
+        repository.read({ email: req.query.email }).then((data) => {
+            res.send(successHandler('Request Done', 200, data))
+        }).catch((err) => { throw err })
+  
         const all = {
-            _id,
             email,
             name,
             role,
         };
-        res.send(successHandler('Request Done', 200, all));
+        // res.send(successHandler('Request Done', 200, all));
     }
     public create(req: Request, res: Response, next: NextFunction) {
         const data = req.query;

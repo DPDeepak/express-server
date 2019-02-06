@@ -5,7 +5,6 @@ export default function seed() {
   repository.count().then((res) => {
 
     if (res <= 0) {
-      console.log('user count is', res);
       repository.create({ name: 'singham', role: 'headTrainer', email: 'singham@up.com'});
     }
   });
