@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 // import { Document, Model, Schema, SchemaType } from 'mongoose';
-
+import * as bcrypt from 'bcrypt'
 import IUserModel from './IUserModel';
 import { userModel } from './UserModel';
 import VersionableRepository from '../versionable/VersionableRepository';
@@ -23,14 +23,28 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
         // return user.save((err, res) => {
         //     console.log('---------------22------', err, res)
         // })
+        let ePass;
+        const salt = 10;
+        bcrypt.hash(process.env.PASSWORD, salt, (err, hash) => {
+            if (err) {
+                throw err;
+            }
+            else {
+                ePass = hash;
+                console.log(ePass);
+
+            }
+
+        });
         console.log(data);
         const id = UserRepository.generateObjectId();
         const saveData = {
             ...data,
             _id: id,
             originalID: id,
+            password: ePass,
         };
-
+        console.log(saveData);
         return this.model.create(saveData);
     }
     public remove(data: any): any {

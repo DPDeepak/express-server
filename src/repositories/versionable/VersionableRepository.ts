@@ -13,7 +13,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     constructor(modelType) {
         this.model = modelType;
     }
-    public genericCreate(data: any): Promise<D> {
+    public async genericCreate(data: any): Promise<D> {
         try {
             const id = VersionableRepository.generateObjectId();
             const saveData = {
@@ -24,9 +24,9 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
                 role: data.role,
             };
             console.log('---------', saveData);
-            this.model.updateOne({ _id: data.originalID }, { $set: { deleted: true } }, { upsert : true }).then(
-                (err) => console.log(err),
-              );
+            const data1 = await this.model.updateOne({ _id: data.originalID }, { $set: { deleted: true } }, { upsert: true });
+            console.log('------', data1);
+
             return this.model.create(saveData);
         }
         catch (err) {
@@ -37,14 +37,12 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
         console.log('email----------------', email);
         console.log('------------------', newName);
         const result = await this.model.findOne({ email });
-        
+
         return this.genericCreate(Object.assign(result, { newName }));
- 
+
         // return this.model.findOne({ email }, (err, result) => {
         //     if (err) { throw new Error(); }
         //     console.log('Result data ', result)
-
-
         // },
 
     }

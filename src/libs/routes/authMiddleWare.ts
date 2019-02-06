@@ -2,14 +2,13 @@ import * as jwt from 'jsonwebtoken';
 import UserRepository from '../../repositories/user/UserRepository';
 import hasPermission from './hasPermission';
 import { successHandler } from './successHandler';
-export default function(module: string, permissionType: string) {
+export default function (module: string, permissionType: string) {
     return (req, res, next) => {
         const token = req.headers.authorization;
         const payload = jwt.verify(token, process.env.KEY);
         const role = payload.role;
-        
-        const {email, newName} = req.query;
-        console.log(email,'---------------------',newName);
+        const { email, newName } = req.query;
+        console.log(email, '---------------------', newName);
         if (role) {
             if (hasPermission(module, role, permissionType)) {
                 next();
