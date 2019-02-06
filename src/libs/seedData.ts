@@ -1,11 +1,14 @@
 import UserRepository from '../repositories/user/UserRepository';
+import * as bcrypt from 'bcrypt'
+
 export default function seed() {
 
   const repository = new UserRepository();
-  repository.count().then((res) => {
+  repository.count().then(async(res) => {
     if (res <= 0) {
-      console.log('user count is', res);
-      repository.create({ name: 'singham', role: 'headTrainer', email: 'singham@up.com'});
+      const salt = 10;
+      const ePass=await bcrypt.hash(process.env.PASSWORD, salt)
+      repository.create({ name: 'singham', role: 'headTrainer', email: 'singham@up.com',password: ePass,});
     }
   });
 

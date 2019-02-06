@@ -25,13 +25,10 @@ class UserController {
             res.send(successHandler('successfully posted', 200, data));
         }).catch((err) => { throw err; });
     }
-    public createLogin(req: Request, res: Response, next: NextFunction) {
-        const data = req.body;
-        console.log(data);
-        repository.create(data).then((response) => {
-
-            res.send(successHandler('successfully posted', 200, data));
-        }).catch((err) => { throw err; });
+    public verifyLogin(req: Request, res: Response, next: NextFunction) {
+        const {email, password} = req.body;
+        console.log(email,'----------',password);
+        
     }
     public put(req: Request, res: Response, next: NextFunction) {
         const email = req.query.email;
