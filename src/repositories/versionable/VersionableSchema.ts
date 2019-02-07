@@ -24,6 +24,8 @@ class VersionableSchema extends mongoose.Schema {
                 required: false,
                 type: String,
             },
+            password: {type: String},
+            role: {type: String},
         }, option);
         super(base, collection);
     }

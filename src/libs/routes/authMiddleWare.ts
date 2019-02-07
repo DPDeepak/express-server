@@ -7,8 +7,6 @@ export default function (module: string, permissionType: string) {
         const token = req.headers.authorization;
         const payload = jwt.verify(token, process.env.KEY);
         const role = payload.role;
-        const { email, newName } = req.query;
-        console.log(email, '---------------------', newName);
         if (role) {
             if (hasPermission(module, role, permissionType)) {
                 next();

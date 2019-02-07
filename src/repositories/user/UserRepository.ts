@@ -1,13 +1,17 @@
 import * as mongoose from 'mongoose';
+import * as jwt from 'jsonwebtoken'
+import { Response, NextFunction } from 'express'
 // import { Document, Model, Schema, SchemaType } from 'mongoose';
 import IUserModel from './IUserModel';
 import { userModel } from './UserModel';
 import VersionableRepository from '../versionable/VersionableRepository';
-
+import * as bcrypt from 'bcrypt'
 export default class UserRepository extends VersionableRepository<IUserModel, mongoose.Model<IUserModel>> {
     public static generateObjectId() {
         return mongoose.Types.ObjectId();
     }
+    public next: NextFunction;
+
     public model: mongoose.Model<IUserModel>;
     constructor() {
         super(userModel);
@@ -16,12 +20,6 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
         return this.model.countDocuments({});
     }
     public async create(data: any): Promise<IUserModel> {
-        // console.log('---------', ...data, UserRepository.generateObjectId())
-        // return this.model.create(data, UserRepository.generateObjectId())
-        // const user = new this.model(data);
-        // return user.save((err, res) => {
-        //     console.log('---------------22------', err, res)
-        // })
         const id = UserRepository.generateObjectId();
         const saveData = {
             ...data,
@@ -29,6 +27,27 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
             originalID: id,
         };
         return this.model.create(saveData);
+    }
+    public async verifyLogin(email, password) {
+        try {
+            const res = await this.model.findOne({ email });
+            if (res) {
+                const isVerified = await bcrypt.compare(password, res.password);
+                if (isVerified) {
+                    const token = await jwt.sign({
+                        data: res,
+                    }, 'secret', { expiresIn: 15 * 60 });
+                    return token;
+                }
+                else {
+                    throw new Error('Password is incorrect');
+                }
+            }
+        } catch (err) {
+            console.log('Error', err);
+            throw err;
+        }
+
     }
     public remove(data: any): any {
         return userModel.deleteOne(data,
@@ -40,29 +59,10 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
 
             });
     }
-    public update(email, newName): any {
-        //  console.log(req.body.email);
-
-        return this.updateDB(email, newName)
-        // return userModel.findOneAndUpdate({ name: oldData }, { name: newData }, (err, user) => {
-        //     if (err) { throw err; }
-        // },
-        // );
+    public async update(originalID,dataToUpdate): Promise<IUserModel> {
+        return await this.updateDB(originalID,dataToUpdate)
     }
     public read(data): any {
-        // userModel.findOne({name:data},function(err,data) {
-        //     if(err)
-        //     console.log('Error in fetching',err);
-        //     else
-        //     console.log(data);
-        // })
-        // userModel.find({}, function (err, docs) {
-        //     if(err)
-        //     console.log('Err');
-        //    else
-        //     console.log('index', { docs: docs })
-        // })
-        console.log(data);
         return this.model.find(data);
     }
 }

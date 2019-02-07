@@ -13,38 +13,26 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     constructor(modelType) {
         this.model = modelType;
     }
-    public async genericCreate(data: any): Promise<D> {
+    public async genericCreate(data: any, dataToUpdate: any): Promise<D> {
         try {
             const id = VersionableRepository.generateObjectId();
-            const saveData = {
-                _id: id,
-                email: data.email,
-                name: data.newName,
-                originalID: data.originalID,
-                role: data.role,
-            };
-            console.log('---------', saveData);
-            const data1 = await this.model.updateOne({ _id: data.originalID }, { $set: { deleted: true } }, { upsert: true });
-            console.log('------', data1);
-
-            return this.model.create(saveData);
+            const n = JSON.parse(JSON.stringify(data));
+            let newObj = Object.assign({}, n, { ...dataToUpdate });
+            newObj._id = id;
+            newObj = JSON.parse(JSON.stringify(newObj));
+            const updated = await this.model.create(newObj);
+            const data1 = await this.model.updateOne({ originalID: data.originalID, deletedAt: { $exists: false } },
+                { deletedAt: Date.now(), deleted: true }).then(
+                    (err) => console.log(err)
+                );
+            return updated;
         }
         catch (err) {
-            console.log(err);
+            console.log('-----33----', err);
         }
     }
-    public async updateDB(email, newName): Promise<D> {
-        console.log('email----------------', email);
-        console.log('------------------', newName);
-        const result = await this.model.findOne({ email });
-
-        return this.genericCreate(Object.assign(result, { newName }));
-
-        // return this.model.findOne({ email }, (err, result) => {
-        //     if (err) { throw new Error(); }
-        //     console.log('Result data ', result)
-        // },
-
+    public async updateDB(ID, dataToUpdate): Promise<D> {
+        const result = await this.model.findOne({ originalID: ID, deletedAt: { $exists: false }  });
+        return this.genericCreate(result, dataToUpdate);
     }
-
 }
