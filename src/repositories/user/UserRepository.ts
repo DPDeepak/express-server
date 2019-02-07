@@ -59,10 +59,11 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
 
             });
     }
-    public async update(originalID,dataToUpdate): Promise<IUserModel> {
-        return await this.updateDB(originalID,dataToUpdate)
+    public async update(originalID, dataToUpdate): Promise<IUserModel> {
+        return await this.updateDB(originalID, dataToUpdate)
     }
-    public read(data): any {
-        return this.model.find(data);
+    public async read(data): Promise<IUserModel> {
+        const result = await this.model.findOne({ originalID: data.originalID, deletedAt: { $exists: false } });
+        return result;
     }
 }

@@ -18,23 +18,5 @@ export default function (module: string, permissionType: string) {
         else {
             next({ error: 'No role found in Token' })
         }
-        // if (payload._id) {
-        //     const repository = new UserRepository();
-        //     repository.read({ _id: payload._id }).then((res) => {
-        //         console.log(res);
-        //         const val = res[1].role;
-        //         console.log(val, '-------------------------------------');
-
-        //         if (val) {
-        //             if (hasPermission(module, val, permissionType)) {
-        //                 next();
-        //             }
-        //             else {
-        //                 next({ error: 'Permission does not exist' });
-        //             }
-        //         }
-        //     });
-        // }
-
     };
 }
