@@ -4,10 +4,11 @@ export interface IPermission {
         read: string[],
         write: string[],
         delete: string[],
-    }
+        update: string[],
+    };
 }
 
 export interface IUsers {
-    traineeEmail: string,
-    reviewerEmail: string
+    traineeEmail: string;
+    reviewerEmail: string;
 }

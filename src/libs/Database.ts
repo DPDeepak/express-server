@@ -1,27 +1,31 @@
-import * as mongoose from "mongoose"
+import * as mongoose from 'mongoose';
+import seed from './seedData';
 class Database {
-    static open(MongoUrl) {
-        return mongoose.connect(MongoUrl, { useNewUrlParser: true }).then(
-            () => {
-                console.log('Successfully connected');
-            },
-            err => {
-                throw new Error(err);
+    public static open(MongoUrl) {
+        // return mongoose.connect(MongoUrl, { useNewUrlParser: true }).then(
+        //     () => {
+        //         console.log('Successfully connected');
+        //         seed()
+        //     },
+        //     err => {
+        //         throw new Error(err);
 
-            }
-        )
-        // return new Promise((resolve,reject)=>{
-        //     mongoose.connect(MongoUrl,{ useNewUrlParser: true}).then(()=>{
-        //         resolve();
-        //     }).catch((err)=> {
-        //         reject(err)
-        //     })
-        // })
+        //     }
+        // )
+        return new Promise((resolve, reject) => {
+            mongoose.connect(MongoUrl, { useNewUrlParser: true}).then(() => {
+                console.log('connected');
+                seed();
+                resolve();
+            }).catch((err) => {
+                reject(err);
+            });
+        });
     }
-    static close() {
-        mongoose.disconnect()
+    public static close() {
+        mongoose.disconnect();
         console.log('Disconnected');
-        
+
     }
 }
-export default Database
+export default Database;

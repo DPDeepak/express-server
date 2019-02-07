@@ -1,61 +1,61 @@
-import { runInNewContext } from "vm";
 
 export const validation = {
-    get: {
-        skip: {
-            required: true,
-            default: 0,
-            number: true,
-            in: ['query'],
-            errorMessage: 'Skip is invalid',
-        },
-        limit: {
-            required: true,
-            default: 10,
-            number: true,
-            in: ['query'],
-            errorMessage: 'Limit is invalid',
-        }
-    },
     create: {
         id: {
+            in: ['body'],
             required: true,
             string: true,
-            in: ['body'],
-            custom: function (value) {
+            custom(value) {
                 console.log('value', value);
-                
-            }
+
+            },
         },
         name: {
-            required: true,
-            regex: /^[a-zA-Z]+$/,
-            in: ['body'],
             errorMessage: 'Name is required',
+            in: ['body'],
+            regex: /^[a-zA-Z]+$/,
+            required: true,
         },
-        
+
     },
     delete: {
         id: {
-            required: true,
             errorMessage: 'Id is required',
-            in: ['body']
-        }
-    },
-    update: {
-        id: {
-            required: true,
-            string: true,
-            in: ['body']
-        },
-        dataToUpdate: {
             in: ['body'],
             required: true,
+        },
+    },
+    get: {
+        limit: {
+            default: 10,
+            errorMessage: 'Limit is invalid',
+            in: ['query'],
+            number: true,
+            required: true,
+        },
+        skip: {
+            default: 0,
+            errorMessage: 'Skip is invalid',
+            in: ['query'],
+            number: true,
+            required: true,
+        },
+
+    },
+    update: {
+        dataToUpdate: {
+            in: ['body'],
             isObject: true,
-            custom: function (dataToUpdate) { 
+            required: true,
+            custom(dataToUpdate) {
                 console.log('dataToUpdate', dataToUpdate);
-                
+
             },
-        }
-    }
-}
+        },
+        id: {
+            in: ['body'],
+            required: true,
+            string: true,
+        },
+    },
+};
