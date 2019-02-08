@@ -4,19 +4,19 @@ import UserRepository from '../../repositories/user/UserRepository';
 
 const repository = new UserRepository();
 class UserController {
-
-    public get(req, res) {
-        const { name, email, role } = req.body.data;
-        repository.read({ email: req.query.email }).then((data) => {
-            res.send(successHandler('Request Done', 200, data))
-        }).catch((err) => { throw err })
-  
-        const all = {
-            email,
-            name,
-            role,
-        };
-        // res.send(successHandler('Request Done', 200, all));
+    public async get(req, res) {
+        try {
+            const result = await repository.read({ originalID: req.query.originalID });
+            if (result) {
+                res.send(successHandler('Request Done', 200, result));
+            }
+            else {
+                throw new Error('Data does not exist')
+            }
+        }
+        catch (err) {
+            throw new Error('Cannot fetch data')
+        }
     }
     public create(req: Request, res: Response, next: NextFunction) {
         const data = req.query;
@@ -25,11 +25,23 @@ class UserController {
             res.send(successHandler('successfully posted', 200, data));
         }).catch((err) => { throw err; });
     }
-    public put(req: Request, res: Response, next: NextFunction) {
-        const email = req.query.email;
-        const newName = req.query.newName;
+    public async verifyLogin(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { email, password } = req.body;
+            console.log(email, '----------', password);
+            const token = await repository.verifyLogin(email, password)
+            console.log('-------32---', token);
 
-        repository.update(email, newName).then((data1) => {
+            res.send(successHandler('successfully posted', 200, token));
+        } catch (err) {
+            next({ error: 'error in login verification' })
+        }
+    }
+    public put(req: Request, res: Response, next: NextFunction) {
+        const originalID = req.body.originalID;
+        const dataToUpdate = req.body.dataToUpdate;
+
+        repository.update(originalID, dataToUpdate).then((data1) => {
             res.send(successHandler('successfully posted', 200, data1));
         }).catch((err) => { throw err; });
     }
@@ -38,9 +50,7 @@ class UserController {
         repository.remove(data).then((data1) => {
             res.send(successHandler('succesfully deleted', 200, data1));
         }).catch((err) => { throw err; });
-
     }
-
 }
 
 export default new UserController();
