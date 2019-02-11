@@ -25,7 +25,7 @@ class Server {
     public async run() {
         const { app, config: { port, MongoUri: mongo } } = this;
         try {
-            await Database.open(mongo)
+            await Database.open(mongo);
             app.listen(port, (error) => {
                 if (error) {
                     throw error;
@@ -36,7 +36,7 @@ class Server {
 
         } catch (err) {
             console.log('Error in connection');
-        };
+        }
     }
     private initBodyParser() {
         const { app } = this;

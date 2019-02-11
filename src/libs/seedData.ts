@@ -1,5 +1,5 @@
+import * as bcrypt from 'bcrypt';
 import UserRepository from '../repositories/user/UserRepository';
-import * as bcrypt from 'bcrypt'
 
 export default async function seed() {
 

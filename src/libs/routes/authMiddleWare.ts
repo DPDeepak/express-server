@@ -2,7 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import UserRepository from '../../repositories/user/UserRepository';
 import hasPermission from './hasPermission';
 import { successHandler } from './successHandler';
-export default function (module: string, permissionType: string) {
+export default function(module: string, permissionType: string) {
     return (req, res, next) => {
         try {
             const token = req.headers.authorization;
@@ -17,11 +17,11 @@ export default function (module: string, permissionType: string) {
                 }
             }
             else {
-                next({ error: 'No role found in Token' })
+                next({ error: 'No role found in Token' });
             }
         }
         catch (err) {
-            next({ error: 'Authentication failed' })
+            next({ error: 'Authentication failed' });
         }
-    }
+    };
 }

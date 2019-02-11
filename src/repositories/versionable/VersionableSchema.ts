@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose'
+import * as mongoose from 'mongoose';
 
 class VersionableSchema extends mongoose.Schema {
     constructor(option: any, collection: any) {
@@ -20,12 +20,12 @@ class VersionableSchema extends mongoose.Schema {
                 required: true,
                 type: String,
             },
+            password: { type: String },
+            role: { type: String },
             updatedBy: {
                 required: false,
                 type: String,
             },
-            password: {type: String},
-            role: {type: String},
         }, option);
         super(base, collection);
     }

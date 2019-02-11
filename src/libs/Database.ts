@@ -6,13 +6,13 @@ class Database {
     public static open(MongoUrl) {
         return new Promise(async (resolve, reject) => {
             try {
-                await mongoose.connect(MongoUrl, { useNewUrlParser: true })
+                await mongoose.connect(MongoUrl, { useNewUrlParser: true });
                 console.log('connected');
                 seed();
                 resolve();
             }
             catch (err) {
-                err = 'Cannot connect to database'
+                err = 'Cannot connect to database';
                 throw err;
 
             }

@@ -50,20 +50,20 @@ export const validation = {
             number: true,
             required: false,
         },
+        originalID: {
+            errorMessage: 'originalID is invalid',
+            in: ['query'],
+            required: true,
+            string: true,
+
+        },
         skip: {
             default: 2,
             errorMessage: 'Skip is invalid',
             in: ['query'],
             number: true,
-            required: false
+            required: false,
         },
-        originalID: {
-            errorMessage: 'originalID is invalid',
-            in: ['query'],
-            string: true,
-            required: true,
-        }
-
     },
     getData: {
         limit: {
@@ -78,7 +78,7 @@ export const validation = {
             errorMessage: 'Skip is invalid',
             in: ['query'],
             number: true,
-            required: false
+            required: false,
         },
     },
     update: {
