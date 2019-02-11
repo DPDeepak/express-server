@@ -1,16 +1,16 @@
 import { Request } from 'express';
 export const validationHandler = (config) => (req: Request, res, next) => {
-    try{
+    try {
     const serverData = Object.keys(req.body);
     const keys = Object.keys(config);
     keys.forEach((key) => {
         const item = config[key];
-        const value = item.in.map((item) => {
+        const value = item.in.map((val) => {
 
-            return req[item][key];
+            return req[val][key];
         });
         if (item && item.required) {
-            const validatedValue = value.filter((item) => item);
+            const validatedValue = value.filter((val) => val);
             if (validatedValue.length !== value.length) {
                 next({ error: item.errorMessage || 'data is missing' });
             }
@@ -53,7 +53,7 @@ export const validationHandler = (config) => (req: Request, res, next) => {
     });
     next();
 }
-catch(err) {
-    next({error:'error in validation'})
+catch (err) {
+    next({error: 'error in validation'});
 }
 };

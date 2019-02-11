@@ -5,5 +5,5 @@ import user from './Controller';
 
 const userLoginRouter = express.Router();
 
-userLoginRouter.post('/', validationHandler(validation.create), user.verifyLogin)
+userLoginRouter.post('/', validationHandler(validation.create), user.verifyLogin);
 export default userLoginRouter;

@@ -11,6 +11,6 @@ function hasPermission(moduleName: string, role: string, permissionType: string)
 
         return false;
     }
-};
+}
 
 export default hasPermission;

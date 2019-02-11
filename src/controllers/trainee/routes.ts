@@ -8,6 +8,6 @@ const traineeRouter = express.Router();
 traineeRouter.get('/', authMiddleWare('trainee', 'read'), validationHandler(validation.get), trainee.get);
 traineeRouter.post('/', authMiddleWare('trainee', 'write'), validationHandler(validation.create), trainee.create);
 traineeRouter.put('/', authMiddleWare('trainee', 'update'), validationHandler(validation.update), trainee.put);
-traineeRouter.delete('/',authMiddleWare('trainee', 'delete'), validationHandler(validation.delete), trainee.delete);
+traineeRouter.delete('/', authMiddleWare('trainee', 'delete'), validationHandler(validation.delete), trainee.delete);
 
 export default traineeRouter;

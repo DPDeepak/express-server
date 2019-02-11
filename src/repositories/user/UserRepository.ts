@@ -1,18 +1,18 @@
+import * as bcrypt from 'bcrypt';
+import { NextFunction, Response } from 'express';
+import * as jwt from 'jsonwebtoken';
 import * as mongoose from 'mongoose';
-import * as jwt from 'jsonwebtoken'
-import { Response, NextFunction } from 'express'
+import VersionableRepository from '../versionable/VersionableRepository';
 import IUserModel from './IUserModel';
 import { userModel } from './UserModel';
-import VersionableRepository from '../versionable/VersionableRepository';
-import * as bcrypt from 'bcrypt'
 export default class UserRepository extends VersionableRepository<IUserModel, mongoose.Model<IUserModel>> {
     public static generateObjectId() {
         try {
             return mongoose.Types.ObjectId();
         }
         catch (err) {
-            err = 'cannot generate objectId'
-            throw err
+            err = 'cannot generate objectId';
+            throw err;
         }
     }
     public next: NextFunction;
@@ -23,12 +23,12 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
     }
     public async count() {
         try {
-            const count = await this.model.find().countDocuments()
+            const count = await this.model.find().countDocuments();
             return count;
         }
         catch (err) {
-            err = 'cannot Count database documents'
-            throw err
+            err = 'cannot Count database documents';
+            throw err;
         }
 
     }
@@ -43,8 +43,8 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
             return this.model.create(saveData);
         }
         catch (err) {
-            err = 'cannot create document'
-            throw err
+            err = 'cannot create document';
+            throw err;
         }
     }
     public async verifyLogin(email, password) {
@@ -71,34 +71,34 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
     public async remove(originalID: any) {
         let result;
         try {
-            result = await this.model.findOne({ originalID: originalID });
+            result = await this.model.findOne({ originalID });
         }
         catch (err) {
-            err = 'cannot delete document'
-            throw err
+            err = 'cannot delete document';
+            throw err;
         }
         try {
-            await this.model.updateOne({ originalID: originalID, deletedAt: { $exists: false } },
-                { deletedAt: Date.now(), deleted: true })
+            await this.model.updateOne({ originalID, deletedAt: { $exists: false } },
+                { deletedAt: Date.now(), deleted: true });
         }
         catch (err) {
-            err = 'cannot delete document successfully'
-            throw err
+            err = 'cannot delete document successfully';
+            throw err;
         }
         if (result.deletedAt) {
-            return 'Document already deleted'
+            return 'Document already deleted';
         }
 
-        return 'Document deleted'
+        return 'Document deleted';
 
     }
     public async update(originalID, dataToUpdate): Promise<IUserModel> {
         try {
-            return await this.updateDB(originalID, dataToUpdate)
+            return await this.updateDB(originalID, dataToUpdate);
         }
         catch (err) {
-            err = 'cannot update document'
-            throw err
+            err = 'cannot update document';
+            throw err;
         }
     }
     public async read(data): Promise<IUserModel> {
@@ -107,8 +107,8 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
             return result;
         }
         catch (err) {
-            err = 'cannot found document'
-            throw err
+            err = 'cannot found document';
+            throw err;
         }
     }
     public async readAll(skip, limit) {
@@ -118,8 +118,8 @@ export default class UserRepository extends VersionableRepository<IUserModel, mo
             return result;
         }
         catch (err) {
-            err = 'cannot found all document'
-            throw err
+            err = 'cannot found all document';
+            throw err;
         }
     }
 }
