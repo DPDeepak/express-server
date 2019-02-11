@@ -1,4 +1,3 @@
-// import { Document, Model } from 'mongoose';
 import * as mongoose from 'mongoose';
 import { userModel } from './../user/UserModel';
 import IVersionableModel from './IVersionableModel';
@@ -22,17 +21,23 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
             newObj = JSON.parse(JSON.stringify(newObj));
             const updated = await this.model.create(newObj);
             const data1 = await this.model.updateOne({ originalID: data.originalID, deletedAt: { $exists: false } },
-                { deletedAt: Date.now(), deleted: true }).then(
-                    (err) => console.log(err)
-                );
+                { deletedAt: Date.now(), deleted: true })
             return updated;
         }
         catch (err) {
-            console.log('-----33----', err);
+            throw err;
         }
     }
     public async updateDB(ID, dataToUpdate): Promise<D> {
-        const result = await this.model.findOne({ originalID: ID, deletedAt: { $exists: false }  });
+        let result;
+        try {
+            result = await this.model.findOne({ originalID: ID, deletedAt: { $exists: false } });
+        }
+        catch (err) {
+            err = 'cannot found document for updation'
+            throw err
+        }
         return this.genericCreate(result, dataToUpdate);
+
     }
 }

@@ -1,12 +1,11 @@
 import UserRepository from '../repositories/user/UserRepository';
 import * as bcrypt from 'bcrypt'
 
-export default function seed() {
+export default async function seed() {
 
   const repository = new UserRepository();
-  repository.count().then(async (res) => {
-    if (res <= 0) {
-      repository.create({ name: 'singham', role: 'headTrainer', email: 'singham@up.com'});
-    }
-  });
+  const res = await repository.count();
+  if (res <= 0) {
+    await repository.create({ name: 'singham', role: 'headTrainer', email: 'singham@up.com' });
+  }
 }

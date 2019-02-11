@@ -7,6 +7,7 @@ export const validation = {
             regex: /^([A-Za-z0-9_\-\.])+\@(gmail.com)$/,
             required: true,
         },
+
         id: {
             in: ['body'],
             required: false,
@@ -15,22 +16,28 @@ export const validation = {
                 console.log('value', value);
 
             },
+
         },
         name: {
             errorMessage: 'Name is required',
             in: ['body'],
             regex: /^[a-zA-Z]+$/,
-            required: false,
+            required: true,
         },
         password: {
             errorMessage: 'Password is required',
             in: ['body'],
+            required: false,
+        },
+        role: {
+            in: ['body'],
             required: true,
+            string: true,
         },
     },
     delete: {
-        id: {
-            errorMessage: 'Id is required',
+        originalID: {
+            errorMessage: 'originalID is required',
             in: ['body'],
             required: true,
         },
@@ -41,16 +48,38 @@ export const validation = {
             errorMessage: 'Limit is invalid',
             in: ['query'],
             number: true,
-            required: true,
+            required: false,
         },
         skip: {
-            default: 0,
+            default: 2,
             errorMessage: 'Skip is invalid',
             in: ['query'],
             number: true,
-            required: true,
+            required: false
         },
+        originalID: {
+            errorMessage: 'originalID is invalid',
+            in: ['query'],
+            string: true,
+            required: true,
+        }
 
+    },
+    getData: {
+        limit: {
+            default: 10,
+            errorMessage: 'Limit is invalid',
+            in: ['query'],
+            number: true,
+            required: false,
+        },
+        skip: {
+            default: 2,
+            errorMessage: 'Skip is invalid',
+            in: ['query'],
+            number: true,
+            required: false
+        },
     },
     update: {
         dataToUpdate: {
@@ -58,11 +87,11 @@ export const validation = {
             isObject: true,
             required: true,
             custom(dataToUpdate) {
-                console.log('dataToUpdate', dataToUpdate);
+                console.log('dataToUpdate in custom function', dataToUpdate);
 
             },
         },
-        id: {
+        originalID: {
             in: ['body'],
             required: true,
             string: true,

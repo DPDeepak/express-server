@@ -22,22 +22,21 @@ class Server {
         app.use(notFoundRoute);
         app.use(errorHandler);
     }
-    public run() {
+    public async run() {
         const { app, config: { port, MongoUri: mongo } } = this;
-        Database.open(mongo)
-            .then(() => {
-                app.listen(port, (error) => {
-                    if (error) {
-                        throw error;
-                    }
-                    console.log('Running on Port : ', port);
-                    // Database.close()
-                });
-
-            })
-            .catch((err) => {
-                console.log('Error in connection');
+        try {
+            await Database.open(mongo)
+            app.listen(port, (error) => {
+                if (error) {
+                    throw error;
+                }
+                console.log('Running on Port : ', port);
+                // Database.close()
             });
+
+        } catch (err) {
+            console.log('Error in connection');
+        };
     }
     private initBodyParser() {
         const { app } = this;

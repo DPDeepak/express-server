@@ -1,25 +1,21 @@
+import { NextFunction } from 'express';
 import * as mongoose from 'mongoose';
 import seed from './seedData';
+
 class Database {
     public static open(MongoUrl) {
-        // return mongoose.connect(MongoUrl, { useNewUrlParser: true }).then(
-        //     () => {
-        //         console.log('Successfully connected');
-        //         seed()
-        //     },
-        //     err => {
-        //         throw new Error(err);
-
-        //     }
-        // )
-        return new Promise((resolve, reject) => {
-            mongoose.connect(MongoUrl, { useNewUrlParser: true}).then(() => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await mongoose.connect(MongoUrl, { useNewUrlParser: true })
                 console.log('connected');
                 seed();
                 resolve();
-            }).catch((err) => {
-                reject(err);
-            });
+            }
+            catch (err) {
+                err = 'Cannot connect to database'
+                throw err;
+
+            }
         });
     }
     public static close() {

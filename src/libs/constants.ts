@@ -9,21 +9,28 @@ const permissions: IPermission = {
         all: [headTrainer],
         delete: [],
         read: [trainee, trainer],
-        update:[],
+        update: [],
         write: [trainer],
     },
     node: {
         all: [headTrainer, trainee],
         delete: [headTrainer],
         read: [trainee, trainer],
-        update:[],
+        update: [],
         write: [trainer, trainee],
     },
-    traineeModule: {
+    trainee: {
         all: [headTrainer],
         delete: [],
         read: [trainee, trainer],
-        update:[],
+        update: [],
+        write: [trainer],
+    },
+    user: {
+        all: [headTrainer],
+        delete: [],
+        read: [trainee, trainer],
+        update: [],
         write: [trainer],
     },
 };

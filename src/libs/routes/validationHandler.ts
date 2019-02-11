@@ -1,6 +1,6 @@
 import { Request } from 'express';
 export const validationHandler = (config) => (req: Request, res, next) => {
-
+    try{
     const serverData = Object.keys(req.body);
     const keys = Object.keys(config);
     keys.forEach((key) => {
@@ -52,4 +52,8 @@ export const validationHandler = (config) => (req: Request, res, next) => {
         }
     });
     next();
+}
+catch(err) {
+    next({error:'error in validation'})
+}
 };
