@@ -12,6 +12,12 @@
     "clean": "rm -r -f dist",
     "nodemon": "nodemon ./dist/index.js"
   },
+  "husky": {
+    "hooks": {
+    "pre-commit": "npm run lint",
+    "pre-push": "npm run lint:fix"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DPDeepak/express-server.git"
